@@ -1,0 +1,1 @@
+/opt/homebrew/Cellar/postgresql@15/15.13/bin/postgres "-D" "/Users/furkancanisci/db_furcan/pgdata_test" "-p" "5433" "-k" "/tmp" "-h" "127.0.0.1"

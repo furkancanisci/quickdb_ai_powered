@@ -1,0 +1,2 @@
+set(__QT_DEPLOY_TARGET_qsqlpsql_FILE /Users/furkancanisci/db_furcan/third_party/qsqlpsql/build/libqsqlpsql.dylib)
+set(__QT_DEPLOY_TARGET_qsqlpsql_TYPE MODULE_LIBRARY)

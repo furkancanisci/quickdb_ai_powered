@@ -1,0 +1,15 @@
+For each department build ONE single SQLite query. HARD OUTPUT RULES: it MUST be at least 100 physical lines long; put every selected column, every CASE branch, every correlated subquery, every JOIN and every CTE clause on its OWN separate line; NEVER compress multiple things onto one line; fully expand all subqueries; no comments, no ellipsis, no truncation.
+
+Structure it as a WITH chain of CTEs, then a final SELECT over those CTEs, then a UNION ALL rollup row:
+
+WITH
+dept_salary AS (per department: headcount, SUM/AVG/MIN/MAX salary, plus a correlated subquery for the highest-paid employee name, a correlated subquery for the lowest-paid employee name, and a correlated subquery approximating median salary),
+dept_reviews AS (per department: review count and AVG rating, plus a correlated subquery for the best quarter rating and one for the worst quarter rating; reviews links ONLY via reviews.employee_id = employees.id then employees.department_id),
+dept_projects AS (per department, EACH as its OWN correlated subquery on separate lines: total spend of 'active' projects, total spend of 'done' projects, total spend of 'on_hold' projects, count active, count done, AVG spend, and the name of the biggest project by spend),
+dept_hours AS (per department: total logged hours and AVG hours, joined via timesheets.employee_id = employees.id then employees.department_id, plus a FULL 12-month pivot: SUM(CASE WHEN STRFTIME('%m', t.week)='01' THEN t.hours ELSE 0 END) as jan, then feb ... one line for each month 01..12),
+emp_rank AS (every employee with RANK() OVER (PARTITION BY department_id ORDER BY salary DESC), DENSE_RANK() OVER (ORDER BY performance_score DESC), and a correlated subquery of how far below the department top salary they are),
+company_stats AS (one row: company AVG salary, AVG performance_score, total project spend, total logged hours)
+SELECT department name, region and every metric column joined on the department, plus each department's AVG salary as a percentage of company_stats AVG salary (own line), plus total project spend as a percentage of company total (own line), plus a CASE bucketing headcount into 'small'/'medium'/'large' with each WHEN on its own line, plus one extra correlated subquery picking the highest-performance employee name in that department
+UNION ALL
+SELECT a final 'ALL DEPARTMENTS (TOTAL)' rollup row aggregating the same columns across the whole company
+ORDER BY 1;

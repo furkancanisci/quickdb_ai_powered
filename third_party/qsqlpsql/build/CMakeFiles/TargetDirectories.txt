@@ -1,0 +1,5 @@
+/Users/furkancanisci/db_furcan/third_party/qsqlpsql/build/CMakeFiles/qsqlpsql.dir
+/Users/furkancanisci/db_furcan/third_party/qsqlpsql/build/CMakeFiles/edit_cache.dir
+/Users/furkancanisci/db_furcan/third_party/qsqlpsql/build/CMakeFiles/rebuild_cache.dir
+/Users/furkancanisci/db_furcan/third_party/qsqlpsql/build/CMakeFiles/qsqlpsql_autogen_timestamp_deps.dir
+/Users/furkancanisci/db_furcan/third_party/qsqlpsql/build/CMakeFiles/qsqlpsql_autogen.dir
